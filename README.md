@@ -33,9 +33,8 @@ hvsr-kde/
 ├── Fig1.py                      # Example: KDE vs lognormal HVSR (UT STN11 example)
 ├── Figs2and3.py                 # Example: KDE HVSR + directional HVSR diagnostics (Rotmoos example)
 │
-├── examples/
-│   ├── UT_STN11/
-│   └── Rotmoos_P1_475/
+├── UT.STN11.A2_C300.miniseed    # data for UT_STN11 example
+├── reftek_3C.mseed              # data for Rotmoos_P1_475 example
 │
 ├── README.md
 ├── CITATION.cff
