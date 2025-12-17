@@ -1,11 +1,14 @@
 cff-version: 1.2.0
 title: "KDE-HVSR Utilities"
 version: 1.0.0
+message: "If you use this software, please cite it as below."
 date-released: 2025-12-17
 
 authors:
-  - family-names: Kuzma
-    given-names: Martin
+  - family-names: Kristek
+    given-names: Jozef
+  - family-names: Kristekova
+    given-names: Miriam
 
 repository-code: https://github.com/kristek-jozef/hvsr-kde/
 license: GPL-3.0-or-later
@@ -16,4 +19,9 @@ preferred-citation:
   authors:
     - family-names: Kristek
       given-names: Jozef
+      orcid: https://orcid.org/0000-0002-2332-541X
+    - family-names: Kristekova
+      given-names: Miriam
+      orcid: https://orcid.org/0000-0001-9017-5952
   year: 2025
+
