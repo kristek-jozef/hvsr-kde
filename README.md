@@ -2,6 +2,7 @@
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.8|3.9|3.10|3.11|3.12|3.13-blue)
+[![DOI](https://zenodo.org/badge/1117631108.svg)](https://doi.org/10.5281/zenodo.18338881)
 
 This repository contains utilities and example scripts for computing  
 **HVSR amplitude statistics using kernel density estimation (KDE)** and  
