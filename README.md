@@ -7,7 +7,9 @@
 This repository contains utilities and example scripts for computing  
 **HVSR amplitude statistics using kernel density estimation (KDE)** and  
 **directional HVSR diagnostics** based on the eigen-decomposition of the  
-horizontal spectral matrix.
+horizontal spectral matrix. 
+
+The methodology is decribed in the **article by** ***Kristek et al.*** (submitted to *Geophysical Research Letters* in 2026).
 
 The code provides:
 
@@ -173,14 +175,17 @@ are located at paths specified in the scripts.
 
 ## Citation
 
+**Kristek, J., Kristekova, M. (2026)**
+KDE-HVSR Utilities (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.18338882
+
+**Kristek, J., Kristekova, M., Moczo, P. (submitted in 2026)**  
+“Nonparametric mode statistics and directional spread of ambient-noise horizontal-to-vertical spectral ratios”
+Geophysical Research Letters
+
 **Vantassel, J. P. (2025)**
 hvsrpy : An Open-Source Python Package for Microtremor and Earthquake Horizontal-to-Vertical Spectral Ratio Processing. 
 Seismological Research Letters, 96(4), 2671–2682.
 https://doi.org/10.1785/0220240395
-
-**Kristek, J., Kristekova, M., Moczo, P. (submitted)**  
-“Nonparametric mode statistics and directional spread of ambient-noise horizontal-to-vertical spectral ratios”
-Geophysical Research Letters
 
 ---
 
