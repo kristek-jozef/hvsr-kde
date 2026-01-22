@@ -1,15 +1,15 @@
-# KDE-HVSR Utilities and Example Figures
+# *KDE-HVSR* Utilities and Example Figures
 
 ![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.8|3.9|3.10|3.11|3.12|3.13-blue)
 [![DOI](https://zenodo.org/badge/1117631108.svg)](https://doi.org/10.5281/zenodo.18338881)
 
-This repository contains utilities and example scripts for computing  
-**HVSR amplitude statistics using kernel density estimation (KDE)** and  
-**directional HVSR diagnostics** based on the eigen-decomposition of the  
+This repository contains utilities and example scripts for computing 
+**HVSR amplitude statistics using kernel density estimation (KDE)** and 
+**directional HVSR diagnostics** based on the eigen-decomposition of the 
 horizontal spectral matrix. 
 
-The methodology is decribed in the **article by** ***Kristek et al.*** (submitted to *Geophysical Research Letters* in 2026).
+The methodology is introduced in the **article by** ***Kristek et al.*** (submitted to *Geophysical Research Letters* in 2026).
 
 The code provides:
 
@@ -20,8 +20,35 @@ The code provides:
 - Konno–Ohmachi smoothing utilities  
 - fully reproducible example figures (**Fig1**, **Figs2&3**)  
 
-The implementation is compatible with **hvsrpy** and processes multi-window HVSR  
-and directional spectra derived from 3-component seismic recordings.
+The implementation processes multi-window HVSR and directional spectra derived from 3-component seismic recordings.
+
+---
+
+## Citation
+If you use *KDE-HVSR* in your research, we ask you please cite the following:
+
+> **Kristek, J., Kristekova, M. (2026)**
+> KDE-HVSR Utilities (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.18338882
+
+> **Kristek, J., Kristekova, M., Moczo, P. (submitted in 2026)**  
+> “Nonparametric mode statistics and directional spread of ambient-noise horizontal-to-vertical spectral ratios”
+> Geophysical Research Letters
+
+---
+
+## References to Implemented Work
+
+*KDE-HVSR* use the publicly available *hvsrpy* package for standard HVSR processing and apply 
+KDE-based post-processing on top of the same window-wise spectral ensembles. 
+We strongly encourage users to cite also original *hvsrpy*:
+
+> **Vantassel, J. P. (2025)**
+> hvsrpy : An Open-Source Python Package for Microtremor and Earthquake Horizontal-to-Vertical Spectral Ratio Processing. 
+> Seismological Research Letters, 96(4), 2671–2682.
+> https://doi.org/10.1785/0220240395
+
+> **Joseph Vantassel. (2020)**
+> jpvantassel/hvsrpy: latest (Concept). Zenodo. http://doi.org/10.5281/zenodo.3666956
 
 ---
 
@@ -170,22 +197,6 @@ python Figs2and3.py
 Make sure the example MSEED files  
 `UT.STN11.A2_C300.miniseed` and `reftek_3C.mseed`  
 are located at paths specified in the scripts.
-
----
-
-## Citation
-
-**Kristek, J., Kristekova, M. (2026)**
-KDE-HVSR Utilities (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.18338882
-
-**Kristek, J., Kristekova, M., Moczo, P. (submitted in 2026)**  
-“Nonparametric mode statistics and directional spread of ambient-noise horizontal-to-vertical spectral ratios”
-Geophysical Research Letters
-
-**Vantassel, J. P. (2025)**
-hvsrpy : An Open-Source Python Package for Microtremor and Earthquake Horizontal-to-Vertical Spectral Ratio Processing. 
-Seismological Research Letters, 96(4), 2671–2682.
-https://doi.org/10.1785/0220240395
 
 ---
 
