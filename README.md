@@ -178,8 +178,8 @@ hvsrpy : An Open-Source Python Package for Microtremor and Earthquake Horizont
 Seismological Research Letters, 96(4), 2671–2682.
 https://doi.org/10.1785/0220240395
 
-**Kristekova et al. (in preparation)**  
-“Nonparametric mode statistics and directional spread of ambient-noise H/V spectral ratios”
+**Kristek, J., Kristekova, M., Moczo, P. (submitted)**  
+“Nonparametric mode statistics and directional spread of ambient-noise horizontal-to-vertical spectral ratios”
 Geophysical Research Letters
 
 ---
