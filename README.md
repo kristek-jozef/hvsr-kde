@@ -18,7 +18,7 @@ The code provides:
 - directional diagnostics based on principal directions of horizontal ground motion  
 - circular highest-density intervals (HDI) for azimuthal samples  
 - Konno–Ohmachi smoothing utilities  
-- fully reproducible example figures (**Fig2**, **Figs3&4**)  
+- fully reproducible example figures (**Fig1**, **Figs2&3**)  
 
 The implementation processes multi-window HVSR and directional spectra derived from 3-component seismic recordings.
 
@@ -60,8 +60,8 @@ hvsr-kde/
 ├── circular_kde_utils.py        # von Mises circular KDE
 ├── kde_utils.py                 # 1D KDE for amplitudes (shared logic)
 │
-├── Fig2.py                      # Example: KDE vs lognormal HVSR (UT STN11 example)
-├── Figs3and4.py                 # Example: KDE HVSR + directional HVSR diagnostics (Rotmoos example)
+├── Fig1.py                      # Example: KDE vs lognormal HVSR (UT STN11 example)
+├── Figs2and3.py                 # Example: KDE HVSR + directional HVSR diagnostics (Rotmoos example)
 │
 ├── UT.STN11.A2_C300.miniseed    # data for UT_STN11 example
 ├── reftek_3C.mseed              # data for Rotmoos_P1_475 example
@@ -141,57 +141,57 @@ Large values of circular HDI indicates that the horizontal energy is distributed
 
 # 📊 Example Scripts
 
-## Fig2.py — KDE vs lognormal HVSR (UT STN11)
+## Fig1.py — KDE vs lognormal HVSR (UT STN11)
 
 Run:
 
 ```bash
-python Fig2.py
+python Fig1.py
 ```
 
-Output: `Fig2_kde_lognormal_ut.png`
+Output: `Fig1_kde_lognormal_ut.png`
 
-![Fig. 2 – UT STN11: HVSR KDE density vs. lognormal stats](Fig1_kde_lognormal_ut.png)
+![Fig. 1 – UT STN11: HVSR KDE density vs. lognormal stats](Fig1_kde_lognormal_ut.png)
 
 ---
 
-## Figs3and4.py — Directional HVSR (Rotmoos)
+## Figs2and3.py — Directional HVSR (Rotmoos)
 
 Run:
 
 ```bash
-python Figs3and4.py
+python Figs2and3.py
 ```
 
-### Fig. 3 — HVSR KDE vs lognormal
+### Fig. 2 — HVSR KDE vs lognormal
 
-![Fig. 3 – Rotmoos: HVSR KDE density vs. lognormal stats](fig3_rotmoos_kde_lognormal.png)
-
----
-
-### Fig. 4a — Angular spread Δφ₀.₆₈(f)
-
-![Fig. 4a – Angular spread Δφ₀.₆₈(f)](fig4a_dphi_rotmoos.png)
+![Fig. 2 – Rotmoos: HVSR KDE density vs. lognormal stats](fig2_rotmoos_kde_lognormal.png)
 
 ---
 
-### Fig. 4b — Directional envelopes
+### Fig. 3a — Angular spread Δφ₀.₆₈(f)
 
-![Fig. 4b – Directional envelopes and constrained band](fig4b_envelope_rotmoos.png)
+![Fig. 3a – Angular spread Δφ₀.₆₈(f)](fig3a_dphi_rotmoos.png)
 
 ---
 
-### Fig. 4c — KDE of √(2Hmin/V) and √(2Hmax/V)
+### Fig. 3b — Directional envelopes
 
-![Fig. 4c – KDE density of √(2Hmin/V) and √(2Hmax/V)](fig4c_Rmin_Rmax_kde.png)
+![Fig. 3b – Directional envelopes and constrained band](fig3b_envelope_rotmoos.png)
+
+---
+
+### Fig. 3c — KDE of √(2Hmin/V) and √(2Hmax/V)
+
+![Fig. 3c – KDE density of √(2Hmin/V) and √(2Hmax/V)](fig3c_Rmin_Rmax_kde.png)
 
 ---
 
 ## Running All Examples
 
 ```bash
-python Fig2.py
-python Figs3and4.py
+python Fig1.py
+python Figs2and3.py
 ```
 
 Make sure the example MSEED files  
@@ -203,3 +203,4 @@ are located at paths specified in the scripts.
 ## Questions?
 
 Open an issue if you want to extend the analysis or figures.
+
