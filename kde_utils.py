@@ -25,6 +25,7 @@ from __future__ import annotations
 from typing import Dict, Tuple, Optional
 
 from obspy import read as obspy_read
+from scipy.signal import detrend
 from scipy.signal.windows import tukey
 
 import numpy as np
@@ -244,7 +245,90 @@ def konno_ohmachi_smooth_spectrum(
             out[i] = float(np.sum((w / s) * spec_in))
     return out
 
+def compute_windowwise_hvsr_from_spectra(
+    Sxx: np.ndarray,
+    Syy: np.ndarray,
+    Szz: np.ndarray,
+    horizontal_divisor: float = 1.0,
+) -> np.ndarray:
+    """
+    Compute window-wise H/V ratios from component power spectra.
 
+    R_i(f) = sqrt( H_i(f) / V_i(f) )
+
+    with
+
+        H_i = (Sxx_i + Syy_i) / horizontal_divisor
+        V_i = Szz_i
+
+    Use horizontal_divisor=1.0 if H is defined as total horizontal power.
+    Use horizontal_divisor=2.0 if H is defined as average horizontal power.
+    """
+    Sxx = np.asarray(Sxx, dtype=float)
+    Syy = np.asarray(Syy, dtype=float)
+    Szz = np.asarray(Szz, dtype=float)
+
+    if Sxx.shape != Syy.shape or Sxx.shape != Szz.shape:
+        raise ValueError("Sxx, Syy and Szz must have the same shape.")
+
+    H = (Sxx + Syy) / float(horizontal_divisor)
+    V = Szz
+
+    R = np.full_like(H, np.nan, dtype=float)
+    valid = (
+        np.isfinite(H) & np.isfinite(V) &
+        (H > 0.0) & (V > 0.0)
+    )
+    R[valid] = np.sqrt(H[valid] / V[valid])
+    return R
+
+
+def compute_energy_ratio_estimator(
+    Sxx: np.ndarray,
+    Syy: np.ndarray,
+    Szz: np.ndarray,
+    horizontal_divisor: float = 1.0,
+    valid_mask: np.ndarray | None = None,
+) -> np.ndarray:
+    """
+    Compute the energy-ratio estimator
+
+        R_E(f) = sqrt( <H(f)> / <V(f)> )
+
+    from the same window-wise spectra used to form R_i(f).
+    """
+    Sxx = np.asarray(Sxx, dtype=float)
+    Syy = np.asarray(Syy, dtype=float)
+    Szz = np.asarray(Szz, dtype=float)
+
+    if Sxx.shape != Syy.shape or Sxx.shape != Szz.shape:
+        raise ValueError("Sxx, Syy and Szz must have the same shape.")
+
+    H = (Sxx + Syy) / float(horizontal_divisor)
+    V = Szz
+
+    valid = (
+        np.isfinite(H) & np.isfinite(V) &
+        (H > 0.0) & (V > 0.0)
+    )
+
+    if valid_mask is not None:
+        valid_mask = np.asarray(valid_mask, dtype=bool)
+        if valid_mask.ndim != 1 or valid_mask.size != H.shape[0]:
+            raise ValueError("valid_mask must have shape (n_win,).")
+        valid &= valid_mask[:, None]
+
+    H_use = np.where(valid, H, np.nan)
+    V_use = np.where(valid, V, np.nan)
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        H_mean = np.nanmean(H_use, axis=0)
+        V_mean = np.nanmean(V_use, axis=0)
+        R_E = np.sqrt(H_mean / V_mean)
+
+    R_E[~np.isfinite(R_E)] = np.nan
+    return R_E
+    
 # --------------------------------------------------------------------------- #
 # Directional spectra from 3C time series (KO B=40)
 # --------------------------------------------------------------------------- #
@@ -286,11 +370,9 @@ def compute_spectra_B40(reftek_file: Path, window_length: float, ko_center_freqs
         i0 = w * nperwin
         i1 = i0 + nperwin
 
-        x = dataN[i0:i1].copy()
-        y = dataE[i0:i1].copy()
-        z = dataZ[i0:i1].copy()
-
-        x -= x.mean(); y -= y.mean(); z -= z.mean()
+        x = detrend(dataN[i0:i1].astype(float), type="linear")
+        y = detrend(dataE[i0:i1].astype(float), type="linear")
+        z = detrend(dataZ[i0:i1].astype(float), type="linear")
 
         taper = tukey(nperwin, alpha=0.1)
         x *= taper; y *= taper; z *= taper
@@ -317,6 +399,7 @@ def compute_spectra_B40(reftek_file: Path, window_length: float, ko_center_freqs
 
     return ko_center_freqs, np.vstack(Sxx_list), np.vstack(Syy_list), np.vstack(Szz_list), np.vstack(Cxy_list)
 
+    
 # ===================================================================== 
 # 2D KDE density from HVSR (for Fig.1 / Fig.2 style plots)
 # ===================================================================== 
@@ -576,6 +659,8 @@ __all__ = [
     "konno_ohmachi_weights",
     "konno_ohmachi_smooth_curve",
     "konno_ohmachi_smooth_spectrum",
+    "compute_windowwise_hvsr_from_spectra",
+    "compute_energy_ratio_estimator",
     "compute_spectra_B40",
     "compute_hvsr_kde_density",
     "compute_r_kde_density",

@@ -18,7 +18,7 @@ The code provides:
 - directional diagnostics based on principal directions of horizontal ground motion  
 - circular highest-density intervals (HDI) for azimuthal samples  
 - Konno–Ohmachi smoothing utilities  
-- fully reproducible example figures (**Fig1**, **Figs2&3**)  
+- fully reproducible example figures (**Fig2**, **Figs3&5**, **Fig4**)  
 
 The implementation processes multi-window HVSR and directional spectra derived from 3-component seismic recordings.
 
@@ -30,9 +30,9 @@ If you use *KDE-HVSR* in your research, we ask you please cite the following:
 > **Kristek, J., Kristekova, M. (2026)**
 > KDE-HVSR Utilities (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.18338882
 
-> **Kristek, J., Kristekova, M., Moczo, P. (submitted in 2026)**  
-> “Nonparametric mode statistics and directional spread of ambient-noise horizontal-to-vertical spectral ratios”
-> Geophysical Journal International
+> **Kristek, J., Kristekova, M., Moczo, P., & Bard, P.-Y. (2026)**  
+> “Improved directional ambient-noise horizontal-to-vertical spectral ratios based on nonparametric mode statistics.”
+> Revised manuscript submitted to Geophysical Journal International.
 
 ---
 
@@ -141,57 +141,75 @@ Large values of circular HDI indicates that the horizontal energy is distributed
 
 # 📊 Example Scripts
 
-## Fig1.py — KDE vs lognormal HVSR (UT STN11)
+## Fig2.py — Manuscript Fig. 2, KDE vs lognormal HVSR (UT STN11)
 
 Run:
 
 ```bash
-python Fig1.py
+python Fig2.py
 ```
 
-Output: `Fig1_kde_lognormal_ut.png`
+Output: `Fig2_kde_lognormal_ut.png`
 
-![Fig. 1 – UT STN11: HVSR KDE density vs. lognormal stats](Fig1_kde_lognormal_ut.png)
+![Fig. 2 – UT STN11: HVSR KDE density vs. lognormal stats](Fig2_kde_lognormal_ut.png)
 
 ---
 
-## Figs2and3.py — Directional HVSR (Rotmoos)
+## Figs3and5.py — Manuscript Figs. 3 and 5, Directional HVSR (Rotmoos)
 
 Run:
 
 ```bash
-python Figs2and3.py
+python Figs3and5.py
 ```
 
-### Fig. 2 — HVSR KDE vs lognormal
+Outputs:
+`fig3_rotmoos_kde_lognormal.png`
+`fig5a_dphi_rotmoos.png`
+`fig5b_envelope_rotmoos.png`
+`fig5c_Rmin_Rmax_kde.png`
 
-![Fig. 2 – Rotmoos: HVSR KDE density vs. lognormal stats](fig2_rotmoos_kde_lognormal.png)
+### Fig. 3 — HVSR KDE vs lognormal
 
----
-
-### Fig. 3a — Angular spread Δφ₀.₆₈(f)
-
-![Fig. 3a – Angular spread Δφ₀.₆₈(f)](fig3a_dphi_rotmoos.png)
-
----
-
-### Fig. 3b — Directional envelopes
-
-![Fig. 3b – Directional envelopes and constrained band](fig3b_envelope_rotmoos.png)
+![Fig. 3 – Rotmoos: HVSR KDE density vs. lognormal stats](fig3_rotmoos_kde_lognormal.png)
 
 ---
 
-### Fig. 3c — KDE of √(2Hmin/V) and √(2Hmax/V)
+### Fig. 5a — Angular spread Δφ₀.₆₈(f)
 
-![Fig. 3c – KDE density of √(2Hmin/V) and √(2Hmax/V)](fig3c_Rmin_Rmax_kde.png)
+![Fig. 5a – Angular spread Δφ₀.₆₈(f)](fig5a_dphi_rotmoos.png)
 
 ---
+
+### Fig. 5b — Directional envelopes
+
+![Fig. 5b – Directional envelopes and constrained band](fig5b_envelope_rotmoos.png)
+
+---
+
+### Fig. 5c — KDE of √(2Hmin/V) and √(2Hmax/V)
+
+![Fig. 5c – KDE density of √(2Hmin/V) and √(2Hmax/V)](fig5c_Rmin_Rmax_kde.png)
+
+---
+
+## Fig4_bandwidth_sensitivity.py — Manuscript Fig. 4, Bandwidth sensitivity
+
+Run:
+
+```bash
+python Fig4_bandwidth_sensitivity.py
+```
+
+Output: `fig4_bandwidth_sensitivity.png`
+
 
 ## Running All Examples
 
 ```bash
-python Fig1.py
-python Figs2and3.py
+python Fig2.py
+python Figs3and5.py
+python Fig4_bandwidth_sensitivity.py
 ```
 
 Make sure the example MSEED files  

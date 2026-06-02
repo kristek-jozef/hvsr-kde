@@ -35,11 +35,17 @@ from scipy.special import i0, i1
 from kde_utils import kde_1d_mode_and_hdi
 
 TAU = 2.0 * np.pi
+PI = np.pi
 
 
 def wrap_0_2pi(phi: np.ndarray) -> np.ndarray:
     """Wrap angles (radians) to [0, 2π)."""
     return np.mod(np.asarray(phi, dtype=float), TAU)
+
+
+def wrap_0_pi(phi: np.ndarray) -> np.ndarray:
+    """Wrap angles (radians) to [0, π). Useful for axial/orientation data."""
+    return np.mod(np.asarray(phi, dtype=float), PI)
 
 
 def mean_resultant_length(phi: np.ndarray) -> Tuple[float, float]:
@@ -351,9 +357,58 @@ def circular_kde_von_mises(
     )
 
 
+@dataclass(frozen=True)
+class AxialCircularKDEResult:
+    """Circular KDE outputs for axial/orientation angles on [0, π)."""
+    phi_mode: float
+    phi_lo: float
+    phi_hi: float
+    dphi: float
+    R_hat: float
+    kappa: float
+    theta_result: CircularKDEResult
+
+
+def axial_circular_kde_von_mises(
+    phi_samples: np.ndarray,
+    alpha: float = 0.68,
+    n_grid: int = 720,
+    kappa: Optional[float] = None,
+) -> AxialCircularKDEResult:
+    """
+    Axial (orientation) circular KDE for angles with π-periodicity.
+
+    Uses θ = 2φ mapping to [0, 2π), runs circular KDE on θ, then maps back.
+    """
+    phi = wrap_0_pi(np.asarray(phi_samples, dtype=float))
+    phi = phi[np.isfinite(phi)]
+    if phi.size == 0:
+        raise ValueError("axial_circular_kde_von_mises: no finite angles.")
+
+    theta = wrap_0_2pi(2.0 * phi)
+    theta_res = circular_kde_von_mises(theta, alpha=alpha, n_grid=n_grid, kappa=kappa)
+
+    phi_mode = float(wrap_0_pi(0.5 * theta_res.phi_mode))
+    phi_lo = float(wrap_0_pi(0.5 * theta_res.phi_lo))
+    phi_hi = float(wrap_0_pi(0.5 * theta_res.phi_hi))
+    dphi = float(0.5 * theta_res.dphi)
+
+    return AxialCircularKDEResult(
+        phi_mode=phi_mode,
+        phi_lo=phi_lo,
+        phi_hi=phi_hi,
+        dphi=dphi,
+        R_hat=theta_res.R_hat,
+        kappa=theta_res.kappa,
+        theta_result=theta_res,
+    )
+
+
 __all__ = [
     "TAU",
+    "PI",
     "wrap_0_2pi",
+    "wrap_0_pi",
     "mean_resultant_length",
     "A1",
     "kappa_from_R",
@@ -362,4 +417,6 @@ __all__ = [
     "circular_kde_pdf",
     "circular_hdi_from_pdf",
     "circular_kde_von_mises",
+    "AxialCircularKDEResult",
+    "axial_circular_kde_von_mises",
 ]
