@@ -57,14 +57,15 @@ We strongly encourage users to cite also original *hvsrpy*:
 ```
 hvsr-kde/
 │
-├── circular_kde_utils.py        # von Mises circular KDE
-├── kde_utils.py                 # 1D KDE for amplitudes (shared logic)
+├── circular_kde_utils.py           # von Mises circular KDE
+├── kde_utils.py                    # 1D KDE for amplitudes (shared logic)
 │
-├── Fig1.py                      # Example: KDE vs lognormal HVSR (UT STN11 example)
-├── Figs2and3.py                 # Example: KDE HVSR + directional HVSR diagnostics (Rotmoos example)
+├── Fig2.py                         # Example: KDE vs lognormal HVSR (UT STN11 example)
+├── Figs3and5.py                    # Example: KDE HVSR + directional HVSR diagnostics (Rotmoos example)
+├── Fig4_bandwidth_sensitivity.py   # Example: Bandwidth sensitivity
 │
-├── UT.STN11.A2_C300.miniseed    # data for UT_STN11 example
-├── reftek_3C.mseed              # data for Rotmoos_P1_475 example
+├── UT.STN11.A2_C300.miniseed       # data for UT_STN11 example
+├── reftek_3C.mseed                 # data for Rotmoos_P1_475 example
 │
 ├── README.md
 ├── CITATION.cff
@@ -203,6 +204,11 @@ python Fig4_bandwidth_sensitivity.py
 
 Output: `fig4_bandwidth_sensitivity.png`
 
+### Fig. 4 — Bandwidth sensitivity
+
+![Fig. 4 – Bandwidth sensitivity](fig4_bandwidth_sensitivity.png)
+
+---
 
 ## Running All Examples
 
