@@ -28,7 +28,7 @@ The implementation processes multi-window HVSR and directional spectra derived f
 If you use *KDE-HVSR* in your research, we ask you please cite the following:
 
 > **Kristek, J., Kristekova, M. (2026)**
-> KDE-HVSR Utilities (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.18338882
+> KDE-HVSR Utilities (Version 1.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.20509097
 
 > **Kristek, J., Kristekova, M., Moczo, P., & Bard, P.-Y. (2026)**  
 > “Improved directional ambient-noise horizontal-to-vertical spectral ratios based on nonparametric mode statistics.”
